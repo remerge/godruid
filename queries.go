@@ -145,7 +145,7 @@ type TimeBoundaryItem struct {
 
 type TimeBoundary struct {
 	MinTime string `json:"minTime"`
-	MaxTime string `json:"minTime"`
+	MaxTime string `json:"maxTime"`
 }
 
 func (q *QueryTimeBoundary) setup() { q.QueryType = "timeBoundary" }
