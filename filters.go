@@ -57,10 +57,10 @@ func FilterNot(filter *Filter) *Filter {
 }
 
 const (
-	filterOrderingLexicographic = "lexicographic"
-	filterOrderingAlphanumeric  = "alphanumeric"
-	filterOrderingNumeric       = "numeric"
-	filterOrderingStrlen        = "strlen"
+	FilterOrderingLexicographic = "lexicographic"
+	FilterOrderingAlphanumeric  = "alphanumeric"
+	FilterOrderingNumeric       = "numeric"
+	FilterOrderingStrlen        = "strlen"
 )
 
 // FilterGreaterEqual: [dimension] >= [value]
@@ -73,8 +73,8 @@ func FilterGreaterEqual(dimension string, value string, ordering string) *Filter
 	}
 }
 
-// FilterGreater: [dimension] > [value]
-func FilterGreater(dimension string, value string, ordering string) *Filter {
+// FilterGreaterThan: [dimension] > [value]
+func FilterGreaterThan(dimension string, value string, ordering string) *Filter {
 	return &Filter{
 		Type:        "bound",
 		Dimension:   dimension,
@@ -94,8 +94,8 @@ func FilterLowerEqual(dimension string, value string, ordering string) *Filter {
 	}
 }
 
-// FilterLower: [dimension] < [value]
-func FilterLower(dimension string, value string, ordering string) *Filter {
+// FilterLowerThan: [dimension] < [value]
+func FilterLowerThan(dimension string, value string, ordering string) *Filter {
 	return &Filter{
 		Type:        "bound",
 		Dimension:   dimension,
