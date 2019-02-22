@@ -11,7 +11,7 @@ type ClusterClient struct {
 	clients []*Client
 }
 
-func NewDruidClusterFromUrl(url string) (*ClusterClient, error) {
+func NewDruidClusterClient(url string) (*ClusterClient, error) {
 	urls := strings.Split(url, ",")
 	if len(urls) == 0 {
 		return nil, errors.New("At least one druid url must be provided")

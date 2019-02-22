@@ -1,4 +1,19 @@
-hash: 869ad77c9b37613a2c017fd8688fec57201e5790bc1b526da579592a156083e4
-updated: 2016-03-18T21:14:58.488455682+01:00
-imports: []
-devImports: []
+hash: ef3e0b1c3cc6ece4f17cd570a569957b5d7f5a60313a4a3c08bae8e55a0060a2
+updated: 2019-02-22T14:48:27.240901942+01:00
+imports:
+- name: github.com/remerge/rand
+  version: 64a39085c6739b997da1f5d17210b005e17f5e4e
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 8991bc29aa16c548c550c7ff78260e27b9ab7c73
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 12b6f73e6084dad08a7c6e575284b177ecafbc71
+  subpackages:
+  - assert
+  - require
