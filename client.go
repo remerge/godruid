@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 const (
@@ -19,6 +20,8 @@ type Client struct {
 	Debug        bool
 	LastRequest  string
 	LastResponse string
+	Timeout      time.Duration // used to configure http post timeout, this is used to force early failure in case there is a server problem,
+	// instead of waiting long for default timeout to happen. Zero timeout means no timeout. This is added to enable models early failure in case of druid issues.
 }
 
 func (c *Client) Query(query Query) (err error) {
@@ -53,7 +56,9 @@ func (c *Client) QueryRaw(req []byte) (result []byte, err error) {
 		return
 	}
 
-	resp, err := http.Post(c.Url+endPoint, "application/json", bytes.NewBuffer(req))
+	httpclient := http.Client{Timeout: c.Timeout}
+
+	resp, err := httpclient.Post(c.Url+endPoint, "application/json", bytes.NewBuffer(req))
 	if err != nil {
 		return
 	}

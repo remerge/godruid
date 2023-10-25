@@ -12,5 +12,5 @@ func TestClusterClientCreation(t *testing.T) {
 	cluster, err := NewDruidClusterClient(url)
 	require.NoError(t, err)
 
-	require.Len(t, cluster.clients, 2)
+	require.Len(t, cluster.Clients, 2)
 }

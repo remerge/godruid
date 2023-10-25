@@ -8,7 +8,7 @@ import (
 )
 
 type ClusterClient struct {
-	clients []*Client
+	Clients []*Client
 }
 
 func NewDruidClusterClient(url string) (*ClusterClient, error) {
@@ -25,8 +25,8 @@ func NewDruidClusterClient(url string) (*ClusterClient, error) {
 }
 
 func (c *ClusterClient) sample() *Client {
-	n := rand.Int() % len(c.clients)
-	return c.clients[n]
+	n := rand.Int() % len(c.Clients)
+	return c.Clients[n]
 }
 
 func (c *ClusterClient) Query(query Query) (err error) {
