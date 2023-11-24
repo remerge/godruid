@@ -1,0 +1,14 @@
+---
+name: go-optional
+
+on:
+  schedule:
+    - cron: "30 0 * * 0"
+
+permissions: read-all
+
+jobs:
+  go-modules:
+    uses: remerge/workflows/.github/workflows/go-modules.yml@main
+    secrets:
+      ssh_key: ${{ secrets.DEPLOY_USER_SSH_KEY }}
