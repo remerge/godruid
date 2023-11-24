@@ -3,18 +3,19 @@ package godruid
 // documentation for druid filtering: http://druid.io/docs/latest/querying/filters.html
 
 type Filter struct {
-	Type        string      `json:"type"`
-	Dimension   string      `json:"dimension,omitempty"`
-	Value       interface{} `json:"value,omitempty"`
-	Pattern     string      `json:"pattern,omitempty"`
-	Function    string      `json:"function,omitempty"`
-	Field       *Filter     `json:"field,omitempty"`
-	Fields      []*Filter   `json:"fields,omitempty"`
-	Lower       string      `json:"lower,omitempty"`
-	Upper       string      `json:"upper,omitempty"`
-	LowerStrict bool        `json:"lowerStrict,omitempty"`
-	UpperStrict bool        `json:"upperStrict,omitempty"`
-	Ordering    string      `json:"ordering,omitempty"`
+	Type         string           `json:"type"`
+	Dimension    string           `json:"dimension,omitempty"`
+	Value        interface{}      `json:"value,omitempty"`
+	Pattern      string           `json:"pattern,omitempty"`
+	Function     string           `json:"function,omitempty"`
+	Field        *Filter          `json:"field,omitempty"`
+	Fields       []*Filter        `json:"fields,omitempty"`
+	Lower        string           `json:"lower,omitempty"`
+	Upper        string           `json:"upper,omitempty"`
+	LowerStrict  bool             `json:"lowerStrict,omitempty"`
+	UpperStrict  bool             `json:"upperStrict,omitempty"`
+	Ordering     string           `json:"ordering,omitempty"`
+	ExtractionFn *DimExtractionFn `json:"extractionFn,omitempty"`
 }
 
 func FilterSelector(dimension string, value interface{}) *Filter {
