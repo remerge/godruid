@@ -1,0 +1,38 @@
+---
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+permissions: read-all
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - run: echo "GO_VERSION=$(grep '^go ' < go.mod | awk '{print $2}')" >> "$GITHUB_ENV"
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - uses: webfactory/ssh-agent@v0.6.0
+        with:
+          ssh-private-key: "${{ secrets.DEPLOY_USER_SSH_KEY }}"
+      - run: 'git config --global url."git@github.com:".insteadOf "https://github.com/"'
+
+      - name: Load envrc
+        uses: HatsuneMiku3939/direnv-action@v1
+
+      - name: Setup pre-commit
+        run: python -m pip install pre-commit
+
+      - name: Install project dependencies
+        run: make install
+
+      - name: Run pre-commit checks
+        uses: pre-commit/action@v3.0.0

@@ -1,3 +1,0 @@
-package: github.com/remerge/godruid
-import:
-- package: github.com/remerge/rand

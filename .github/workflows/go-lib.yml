@@ -1,0 +1,27 @@
+---
+name: go-lib
+
+on:
+  pull_request:
+  push:
+    branches: [main, master, production]
+
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  deployments: read
+  issues: read
+  discussions: read
+  packages: read
+  pages: read
+  pull-requests: read
+  repository-projects: read
+  security-events: read
+  statuses: read
+
+jobs:
+  go-checks:
+    uses: remerge/workflows/.github/workflows/go-checks.yml@main
+    secrets:
+      ssh_key: ${{ secrets.DEPLOY_USER_SSH_KEY }}
