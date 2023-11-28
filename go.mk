@@ -1,3 +1,5 @@
+GO_VERSION := 1.21
+
 SHADOW_LINTER := golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
 SHADOW_LINTER_VERSION := v0.13.0
 
@@ -10,8 +12,8 @@ REVIVE_LINTER := github.com/mgechev/revive
 
 .PHONY: go-update
 go-update:: ## update Go modules
-	go get -u -x
-	go mod tidy
+	@go get -u -x ./... 2>&1 | grep -vP '^(#|mkdir|cd|\d\.\d\d\ds #)' || :
+	@go mod tidy -v -x -go $(GO_VERSION)
 update:: go-update
 
 .PHONY: go-build
@@ -255,8 +257,7 @@ endif
 
 divert: .check-dependencies .nomad-env .input-validation
 	@mkdir -p .build
-	@docker build --build-arg \
-	"GO_VERSION=$$(grep '^go ' < go.mod | awk '{print $$2}')" \
+	@docker build \
 	--build-arg "CI_COMMIT=$(TASK_IMAGE)" \
 	--build-arg "CI_REPO=$(PROJECT_REPO)" \
 	--build-arg "CI_REPO=$(DEV_WHOAMI)" \

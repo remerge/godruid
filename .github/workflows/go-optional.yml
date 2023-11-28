@@ -5,7 +5,20 @@ on:
   schedule:
     - cron: "30 0 * * 0"
 
-permissions: read-all
+permissions:
+  actions: none
+  checks: none
+  contents: read
+  deployments: none
+  discussions: none
+  id-token: none
+  issues: none
+  packages: none
+  pages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: none
 
 jobs:
   go-modules:

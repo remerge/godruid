@@ -573,3 +573,6 @@ id_*
 # only.
 !*.tfvars
 !*.tfvars.json
+
+# Ignore direnv files
+.direnv/
