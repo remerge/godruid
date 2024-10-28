@@ -16,6 +16,7 @@ type Filter struct {
 	UpperStrict  bool             `json:"upperStrict,omitempty"`
 	Ordering     string           `json:"ordering,omitempty"`
 	ExtractionFn *DimExtractionFn `json:"extractionFn,omitempty"`
+	Expression   string           `json:"expression,omitempty"`
 }
 
 func FilterSelector(dimension string, value interface{}) *Filter {
