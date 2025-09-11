@@ -10,7 +10,7 @@ default_install_hook_types:
 repos:
   # https://github.com/pre-commit/pre-commit-hooks/tags
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.5.0"
+    rev: "v4.6.0"
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -33,48 +33,48 @@ repos:
 
   # https://github.com/pre-commit/mirrors-prettier/tags
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v3.0.3"
+    rev: "v3.1.0"
     hooks:
       - id: prettier
         exclude: "^project/"
 
   # https://github.com/igorshubovych/markdownlint-cli/tags
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: "v0.37.0"
+    rev: "v0.39.0"
     hooks:
       - id: markdownlint-fix
         name: markdownlint
 
   # https://github.com/adrienverge/yamllint/tags
   - repo: https://github.com/adrienverge/yamllint
-    rev: "v1.32.0"
+    rev: "v1.35.1"
     hooks:
       - id: yamllint
         entry: yamllint --strict
 
   # https://github.com/pecigonzalo/pre-commit-shfmt/tags
   - repo: https://github.com/pecigonzalo/pre-commit-shfmt
-    rev: "v2.1.0"
+    rev: "v2.2.0"
     hooks:
       - id: shell-fmt-go
 
   # https://github.com/koalaman/shellcheck-precommit/tags
   - repo: https://github.com/koalaman/shellcheck-precommit
-    rev: "v0.9.0"
+    rev: "v0.10.0"
     hooks:
       - id: shellcheck
         name: shellcheck
 
   # https://github.com/rhysd/actionlint/tags
   - repo: https://github.com/rhysd/actionlint
-    rev: "v1.6.26"
+    rev: "v1.6.27"
     hooks:
       - id: actionlint-docker
         name: actionlint
 
   # https://github.com/bridgecrewio/checkov/tags
   - repo: https://github.com/bridgecrewio/checkov
-    rev: "3.0.24"
+    rev: "3.2.74"
     hooks:
       - id: checkov
         name: checkov
