@@ -2,9 +2,10 @@ package godruid
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -19,9 +20,15 @@ type Client struct {
 	Debug        bool
 	LastRequest  string
 	LastResponse string
+
+	HttpClient *http.Client
 }
 
-func (c *Client) Query(query Query) (err error) {
+func (c *Client) Query(query Query) error {
+	return c.QueryWithContext(context.Background(), query)
+}
+
+func (c *Client) QueryWithContext(ctx context.Context, query Query) (err error) {
 	query.Setup()
 	var reqJson []byte
 	if c.Debug {
@@ -32,7 +39,7 @@ func (c *Client) Query(query Query) (err error) {
 	if err != nil {
 		return
 	}
-	result, err := c.QueryRaw(reqJson)
+	result, err := c.QueryRawWithContext(ctx, reqJson)
 	if err != nil {
 		return
 	}
@@ -40,7 +47,11 @@ func (c *Client) Query(query Query) (err error) {
 	return query.OnResponse(result)
 }
 
-func (c *Client) QueryRaw(req []byte) (result []byte, err error) {
+func (c *Client) QueryRaw(req []byte) ([]byte, error) {
+	return c.QueryRawWithContext(context.Background(), req)
+}
+
+func (c *Client) QueryRawWithContext(ctx context.Context, req []byte) ([]byte, error) {
 	if c.EndPoint == "" {
 		c.EndPoint = DefaultEndPoint
 	}
@@ -49,29 +60,32 @@ func (c *Client) QueryRaw(req []byte) (result []byte, err error) {
 		endPoint += "?pretty"
 		c.LastRequest = string(req)
 	}
-	if err != nil {
-		return
+
+	if c.HttpClient == nil {
+		c.HttpClient = http.DefaultClient
 	}
 
-	resp, err := http.Post(c.Url+endPoint, "application/json", bytes.NewBuffer(req))
+	request, err := http.NewRequestWithContext(ctx, http.MethodPost, c.Url+endPoint, bytes.NewBuffer(req))
 	if err != nil {
-		return
+		return nil, err
 	}
-	defer func() {
-		resp.Body.Close()
-	}()
-
-	result, err = ioutil.ReadAll(resp.Body)
+	response, err := c.HttpClient.Do(request)
 	if err != nil {
-		return
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	payload, err := io.ReadAll(response.Body)
+	if err != nil {
+		return nil, err
 	}
 	if c.Debug {
-		c.LastResponse = string(result)
+		c.LastResponse = string(payload)
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%s: %s", resp.Status, string(result))
+	if response.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("%s: %s", response.Status, string(payload))
 	}
 
-	return
+	return payload, nil
 }
