@@ -1,6 +1,7 @@
 package godruid
 
 import (
+	"context"
 	"errors"
 	"net/http"
 	"strings"
@@ -41,4 +42,8 @@ func (c *ClusterClient) sample() *Client {
 
 func (c *ClusterClient) Query(query Query) (err error) {
 	return c.sample().Query(query)
+}
+
+func (c *ClusterClient) QueryWithContext(ctx context.Context, query Query) (err error) {
+	return c.sample().QueryWithContext(ctx, query)
 }
