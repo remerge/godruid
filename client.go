@@ -69,6 +69,10 @@ func (c *Client) QueryRawWithContext(ctx context.Context, req []byte) ([]byte, e
 	if err != nil {
 		return nil, err
 	}
+	if request.Header.Get("Content-Type") == "" {
+		request.Header.Set("Content-Type", "application/json")
+	}
+
 	response, err := c.HttpClient.Do(request)
 	if err != nil {
 		return nil, err
