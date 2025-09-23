@@ -13,6 +13,13 @@ type PostAggregation struct {
 	FieldName  string            `json:"fieldName,omitempty"`
 	FieldNames []string          `json:"fieldNames,omitempty"`
 	Function   string            `json:"function,omitempty"`
+	Field      FieldAccess       `json:"field,omitempty"`
+	Fractions  []float64         `json:"fractions,omitempty"`
+}
+
+type FieldAccess struct {
+	Type      string `json:"type"`
+	FieldName string `json:"fieldName"`
 }
 
 // The agg reference.

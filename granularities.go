@@ -12,6 +12,7 @@ const (
 	GranThirtyMin  SimpleGran = "thirty_minute"
 	GranHour       SimpleGran = "hour"
 	GranDay        SimpleGran = "day"
+	GranMonth      SimpleGran = "month"
 )
 
 type GranDuration struct {

@@ -13,6 +13,7 @@ type Aggregation struct {
 	FnCombine   string   `json:"fnCombine,omitempty"`
 	FnReset     string   `json:"fnReset,omitempty"`
 	ByRow       bool     `json:"byRow,omitempty"`
+	K           int      `json:"k,omitempty"`
 }
 
 func AggRawJson(rawJson string) Aggregation {
