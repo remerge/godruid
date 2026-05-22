@@ -77,7 +77,7 @@ repos:
 
   # https://github.com/bridgecrewio/checkov/tags
   - repo: https://github.com/bridgecrewio/checkov
-    rev: "3.2.524"
+    rev: "3.2.529"
     hooks:
       - id: checkov
         name: checkov
@@ -91,7 +91,7 @@ repos:
 
   # https://github.com/golangci/golangci-lint/tags
   - repo: https://github.com/golangci/golangci-lint
-    rev: "v2.11.4"
+    rev: "v2.12.2"
     hooks:
       - id: golangci-lint
         args: [--config=.golangci.yml]

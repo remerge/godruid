@@ -1,12 +1,12 @@
 ---
 # Changes here will be overwritten by Copier
-_commit: v2.85.0
+_commit: v2.89.0
 _src_path: gh:remerge/template
 is_golang_library: true
 project_id: godruid
 project_license: private
 project_name: Druid Client for Go
-project_owner: core
+project_owner: data
 project_type: default
 use_ansible: false
 use_consul: false

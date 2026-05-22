@@ -58,7 +58,7 @@ jobs:
 
       - name: Load envrc
         # https://github.com/HatsuneMiku3939/direnv-action/releases
-        uses: HatsuneMiku3939/direnv-action@v1.2.1
+        uses: HatsuneMiku3939/direnv-action@v1.3.4
 
       - name: Install project dependencies
         run: make install
