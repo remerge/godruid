@@ -1,8 +1,6 @@
 module github.com/remerge/godruid
 
-go 1.21
-
-toolchain go1.26.10
+go 1.27.3
 
 require (
 	github.com/remerge/rand v0.0.0-20231129184053-a5d75e94409e
