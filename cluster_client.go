@@ -3,10 +3,9 @@ package godruid
 import (
 	"context"
 	"errors"
+	"math/rand/v2"
 	"net/http"
 	"strings"
-
-	"github.com/remerge/rand"
 )
 
 type ClusterClient struct {
@@ -36,8 +35,7 @@ func NewDruidClusterWithHTTP(url string, httpClient *http.Client) (*ClusterClien
 }
 
 func (c *ClusterClient) sample() *Client {
-	n := rand.Int() % len(c.clients)
-	return c.clients[n]
+	return c.clients[rand.IntN(len(c.clients))]
 }
 
 func (c *ClusterClient) Query(query Query) (err error) {
